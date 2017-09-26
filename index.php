@@ -69,7 +69,7 @@
                 <input type="email" name="user_email" placeholder="Email:"/>
                 <input type="password" name="user_password" placeholder="Senha:"/>
                 <input type="number" name="user_level" min="1" max="3" placeholder="Nível de Acesso:"/>
-                <button></button>    
+                <button class="j_btncadastro" value="teste"></button>    
                               
                 <img class="form_load" src="img/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
             </form>

@@ -96,7 +96,8 @@ $(function () {
             dataType: 'json',
             beforeSend: function () {
                 $('.j_userid').remove();
-                $('.register, .buttonUpdate').contents().val('Alterar');
+                $('.j_formsubmit').find('.j_btncadastro').text(" Alterar");
+                
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
