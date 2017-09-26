@@ -24,8 +24,8 @@ switch ($Action):
         $Upload = new Upload;
         $Upload->Image($_FILES['imagem']);
         break;
-    
-    
+
+
     case 'create':
         if (in_array('', $Post)):
             $jSon['error'] = "<b>OPSSS:</b>Para Cadastrar um Usuário, preenca todos os campos!";
@@ -79,20 +79,26 @@ switch ($Action):
         break;
 
     case 'deleteuser':
+        // antes deletar verificar se o usário é administrador
+        $Read->ExeRead('ws_users', "WHERE user_id = :id and user_level = 3", "id={$Post['user_id']}");
+        if ($Read->getResult()):
+            $jSon['admin'] = true;
+        else:
+            $Delete->ExeDelete('ws_users', "WHERE user_id = :id", "id={$Post['user_id']}");
+            if (!$Delete->getRowCount()):
+                $jSon['error'] = true;
+            endif;
+        endif;
+
+        break;
+
+    case 'readuser':
         $Read->ExeRead('ws_users', "WHERE user_id = :id", "id={$Post['user_id']}");
         if ($Read->getResult()):
             $jSon['user'] = $Read->getResult()[0];
         else:
             $jSon['error'] = true;
         endif;
-        break;
-
-    case 'deleteuser':
-
-        $Delete->ExeDelete('ws_users', "WHERE user_id = :id", "id={$Post['user_id']}");
-        if (!$Delete->getRowCount()) {
-            $jSon['error'] = true;
-        }
         break;
 
     default:

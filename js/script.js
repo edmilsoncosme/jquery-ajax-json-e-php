@@ -96,6 +96,7 @@ $(function () {
             dataType: 'json',
             beforeSend: function () {
                 $('.j_userid').remove();
+                $('.register, .buttonUpdate').contents().val('Alterar');
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
@@ -122,11 +123,13 @@ $(function () {
             url: 'ajax/ajax.php',
             data: {action: 'deleteuser', user_id: user_id},
             type: 'POST',
-            dataType: 'json',
-            success: function (data) {
+            dataType: 'json',          
+            success: function (data) {                               
                 if (data.error) {
                     alert('Erro ao deletar. Favor recarregue a página!');
-                } else {                  
+                }else if (data.admin) {
+                   alert('Usuário com perfil de adminstrador! Não pode ser deletado.!');
+                }else {                  
                     $('#' + user_id).fadeOut(400, function () {
                         $(this).remove();
                     });
