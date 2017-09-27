@@ -47,7 +47,7 @@ switch ($Action):
 
     case 'update':
         if (in_array('', $Post)):
-            $jSon['error'] = "<b>OPSSS:</b>Para Cadastrar um Usuário, preenca todos os campos!";
+            $jSon['error'] = "<b>OPSSS:</b>Para Alterar um Usuário, preenca todos os campos!";
         elseif (!Check::Email($Post['user_email']) || !filter_var($Post['user_email'], FILTER_VALIDATE_EMAIL)):
             $jSon['error'] = "<b>OPSSS:</b>Favor, Informe um e-mail válido!";
         elseif (strlen($Post['user_password']) < 5 || strlen($Post['user_password']) > 10) :
@@ -61,6 +61,8 @@ switch ($Action):
                 unset($Post['user_id']);
                 $Update->ExeUpdate("ws_users", $Post, "WHERE user_id = :id", "id={$UserId}");
                 $jSon['success'] = "Usuário atualizado com sucesso!";
+                
+                $jSon['result'] = "<article style='display:none' class='user_box j_register' id='{$Create->getResult()}'><h1>{$Post['user_name']} {$Post['user_lastname']}</h1><p>{$Post['user_email']} (Nível {$Post['user_level']})</p><a class='action edit j_edit' rel='{$Create->getResult()}'>Editar</a><a class='action del' rel='{$Create->getResult()}'>Deletar</a></article>";
             endif;
         endif;
         break;
