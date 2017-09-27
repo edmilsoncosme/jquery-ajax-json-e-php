@@ -19,7 +19,7 @@
             .register input{width: 100%; padding: 10px; margin-bottom: 10px;}
             
             .register button{background: #09f; border: 2px solid #fff; outline: 2px solid #09f; padding: 10px; cursor: pointer; color: #fff; text-transform: uppercase; margin-top: 10px;}
-            .register button:before{content: 'Cadastrar Usuário';}
+/*            .register button:before{content: 'Cadastrar Usuário--';}*/
             .register .buttonUpdate{background: #09f; border: 2px solid #fff; outline: 2px solid #09f; padding: 10px; cursor: pointer; color: #fff; text-transform: uppercase; margin-top: 10px;}
             /*.register .buttonUpdate:before{content: 'Alterar Usuário';}*/
             
@@ -63,13 +63,13 @@
             <form name="user_register" class="j_formsubmit usercreate" method="post" action="">
                 <div class="trigger-box"></div>                              
 
-                <input class="noclear"  type="hidden" name="action"  value="create"/>
+                <input class="noclear"  type="text" name="action"  value="create"/>
                 <input type="text" name="user_name" placeholder="Nome:"/>
                 <input type="text" name="user_lastname" placeholder="Sobrenome:"/>
                 <input type="email" name="user_email" placeholder="Email:"/>
                 <input type="password" name="user_password" placeholder="Senha:"/>
                 <input type="number" name="user_level" min="1" max="3" placeholder="Nível de Acesso:"/>
-                <button class="j_btncadastro" value="teste"></button>    
+                <button class="j_btncadastro">Cadastrar Usuário</button>    
                               
                 <img class="form_load" src="img/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
             </form>
@@ -89,7 +89,7 @@
                             <p><?= $user_email; ?> (Nível<?= $user_level; ?>)</p>
                             <a class="action edit j_edit" rel="<?= $user_id; ?>">Editar</a>
                             <a class="action del j_delete " rel="<?= $user_id; ?>">Deletar</a>
-                            <img class="form_load" src="img/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>
+                            <!--<img class="form_load" src="img/load.gif" alt="[CARREGANDO...]" title="CARREGANDO..."/>-->
                         </article>
                         <?php
                     endforeach;
