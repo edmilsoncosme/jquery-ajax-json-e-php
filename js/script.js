@@ -96,7 +96,8 @@ $(function () {
             dataType: 'json',
             beforeSend: function () {
                 $('.j_userid').remove();
-                $('.j_formsubmit').find('.j_btncadastro').text("Alterar Usuário");                
+                $('.j_formsubmit').find('.j_btncadastro').text(" Alterar");
+                
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
@@ -106,12 +107,12 @@ $(function () {
                 if (data.error) {
                     alert('Erro ao selecionar ou usuário não exite');
                 } else {
-                    // percorendo o array retornado
+                    // percorendo o array ternado
                     $.each(data.user, function (key, value) {
                         $('.j_formsubmit').find('input[name="' + key + '"]').val(value);
                     });
                     $('.j_formsubmit').find('input[name="action"]').val('update');
-                    $('<input type="text" class="j_userid" name="user_id" value="' + data.user.user_id + '"/>').prependTo('.j_formsubmit');
+                    $('<input type="hidden" class="j_userid" name="user_id" value="' + data.user.user_id + '"/>').prependTo('.j_formsubmit');
                 }
             }
         });
