@@ -5,7 +5,7 @@
  * Classe abstrata de conexão. Padrão SingleTon.
  * Retorna um objeto PDO pelo método estático getConn();
  * 
- * @copyright (45836)(c) 2016, Robson V. Leite - UPINSIDE TREINAMENTOS
+ * @copyright (45836)(c) 2017-09-20T21:45:27-0300, Robson V. Leite - UPINSIDE TREINAMENTOS
  */
 abstract class Conn {
 

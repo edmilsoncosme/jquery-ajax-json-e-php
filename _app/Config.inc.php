@@ -6,21 +6,21 @@ define('USER', 'root');
 define('PASS', '');
 define('DBSA', 'wsphp');
 
-// DEFINE SERVIDOR DE E-MAIL ####################
-define('MAILUSER', 'edmilsoncosme@unb.br');
-define('MAILPASS', '150E762d');
-define('MAILPORT', '587');
-define('MAILHOST', 'mail.unb.br');
+// DEFINE SERVIDOR DE E-MAIL ################
+define('MAILUSER', 'email@dominio.com.br');
+define('MAILPASS', 'senhadoemail');
+define('MAILPORT', 'postadeenvio');
+define('MAILHOST', 'servidordeenvio');
 
-// DEFINE IDENTIDADE DO SITE  ####################
+// DEFINE IDENTIDADE DO SITE ################
 define('SITENAME', 'Cidade Online');
-define('SITEDESC', 'Este site foi desenvolvido no curso de PHP Orientado a Objetos da UPINSIDE T');
+define('SITEDESC', 'Este site foi desenvolvido no curso de PHP Orientado a Objetos da UPINSIDE TREINAMENTOS. O mesmo utiliza a arquitetura semântica do HTML5 e foi criado com as últimas técnologias disponíveis!');
 
-// DEFINE A HOME DO SITE##### ####################
-define('HOME', 'http://localhost/cursos/ws_php/modulos/12-projeto-final');
+// DEFINE A BASE DO SITE ####################
+define('HOME', 'https://localhost/cursos/ws_php/modulos/12-projeto-final');
 define('THEME', 'cidadeonline');
 
-define('INCLUDE_PATH', HOME . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . THEME);
+define('INCLUDE_PATH', HOME . '/themes/' . THEME);
 define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
 
 // AUTO LOAD DE CLASSES ####################
@@ -30,8 +30,8 @@ function __autoload($Class) {
     $iDir = null;
 
     foreach ($cDir as $dirName):
-        if (!$iDir && file_exists(__DIR__ . DIRECTORY_SEPARATOR . "{$dirName}" . DIRECTORY_SEPARATOR . "{$Class}.class.php") && !is_dir(__DIR__ . DIRECTORY_SEPARATOR . "{$dirName}" . DIRECTORY_SEPARATOR . "{$Class}.class.php")):
-            include_once (__DIR__ .DIRECTORY_SEPARATOR. "{$dirName}" .DIRECTORY_SEPARATOR. "{$Class}.class.php");
+        if (!$iDir && file_exists(__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php') && !is_dir(__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php')):
+            include_once (__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php');
             $iDir = true;
         endif;
     endforeach;

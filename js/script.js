@@ -4,35 +4,37 @@ $(function () {
         $(this).toggleClass('closeform');
         $('.j_userid').remove();
         $('.' + $(this).attr('rel')).slideToggle();
-        $('.j_formsubmit').find('input[class !="noclear"]').val('');
+        $('.j_formsubmit').find('input[class!="noclear"]').val('');
         $('.j_formsubmit').find('input[name="action"]').val('create');
     });
-    
-    $('.j_upload').submit(function(){
+
+
+    $('.j_upload').submit(function () {
         var form = $(this);
+
         form.ajaxSubmit({
             url: 'ajax/ajax.php',
             data: {action: 'upload'},
-            beforeSubmit: function(){
-                
+            breforeSubmit: function () {
+
             },
-            uploadProgress: function(evento, posicao, total, completo){
+            uploadProgress: function (evento, posicao, total, completo) {
                 form.find('.j_progress').fadeIn();
-                 $('.j_progress .bar').text(completo + "%").width(completo + "%");
+                $('.j_progress .bar').text(completo + "%").width(completo + "%");
             },
-            success: function(){
-                
+            success: function () {
+
             }
         });
-        // pra não enviar via http e sim via ajax
+
         return false;
     });
-    
-    
-    $('.j_load').click(function () {
 
+
+    $('.j_load').click(function () {
         var destino = $('.' + $(this).attr('rel'));
         var loaded = destino.find('article').length;
+
         $.ajax({
             url: 'ajax/ajax.php',
             data: {action: 'loadmore', offset: loaded},
@@ -52,10 +54,12 @@ $(function () {
             }
         });
     });
-    //SELETOR, EVENTO/EFEITO, CALLBACK , AÇÃO
+
+    //SELETOR, EVENTO/EFEITO, CALLBACK, AÇÃO
     $('.j_formsubmit').submit(function () {
         var form = $(this);
         var data = $(this).serialize();
+
         $.ajax({
             url: 'ajax/ajax.php',
             data: data,
@@ -63,7 +67,7 @@ $(function () {
             dataType: 'json',
             beforeSend: function () {
                 form.find('.form_load').fadeIn(500);
-                form.find('.trigger-error').fadeOut(500, function () {
+                form.find('.trigger').fadeOut(500, function () {
                     $(this).remove();
                 });
             },
@@ -74,29 +78,29 @@ $(function () {
                 } else {
                     form.find('.trigger-box').html('<div class="trigger trigger-success">' + resposta.success + '</div>');
                     form.find('.trigger-success').fadeIn();
-                    form.find('input[class !="noclear"]').val('');
+                    form.find('input[class!="noclear"]').val('');
+
                     $(resposta.result).prependTo($('.register').find('.j_list'));
                     $('.j_register').fadeIn(400);
+
                 }
                 form.find('.form_load').fadeOut(500);
             }
         });
+
         return false;
     });
-    // monitoramento de dom - quando clicar no j_list vai buscar os j_edit e gerar ação
-    // sepre que carregar alguma coisa com jquery tem que seguir essa lógica de monitroamento
-    // do dom
+
+
     $('.j_list').on('click', '.j_edit', function () {
         var user_id = $(this).attr('rel');
         $.ajax({
-
             url: 'ajax/ajax.php',
             data: {action: 'readuser', user_id: user_id},
             type: 'POST',
             dataType: 'json',
             beforeSend: function () {
                 $('.j_userid').remove();
-                $('.j_formsubmit').find('.j_btncadastro').text("Alterar Usuário");                
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
@@ -104,14 +108,13 @@ $(function () {
                 }
 
                 if (data.error) {
-                    alert('Erro ao selecionar ou usuário não exite');
+                    alert('Erro ao selecionar ou usuário não existe!');
                 } else {
-                    // percorendo o array retornado
                     $.each(data.user, function (key, value) {
                         $('.j_formsubmit').find('input[name="' + key + '"]').val(value);
                     });
                     $('.j_formsubmit').find('input[name="action"]').val('update');
-                    $('<input type="text" class="j_userid" name="user_id" value="' + data.user.user_id + '"/>').prependTo('.j_formsubmit');
+                    $('<input type="hidden" class="j_userid" name="user_id" value="' + data.user.user_id + '"/>').prependTo('.j_formsubmit');
                 }
             }
         });
@@ -123,13 +126,11 @@ $(function () {
             url: 'ajax/ajax.php',
             data: {action: 'deleteuser', user_id: user_id},
             type: 'POST',
-            dataType: 'json',          
-            success: function (data) {                               
+            dataType: 'json',
+            success: function (data) {
                 if (data.error) {
                     alert('Erro ao deletar. Favor recarregue a página!');
-                }else if (data.admin) {
-                   alert('Usuário com perfil de adminstrador! Não pode ser deletado.!');
-                }else {                  
+                } else {
                     $('#' + user_id).fadeOut(400, function () {
                         $(this).remove();
                     });
@@ -137,8 +138,5 @@ $(function () {
             }
         });
     });
-
 });
-
-
 

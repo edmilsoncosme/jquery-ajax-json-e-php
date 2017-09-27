@@ -10,6 +10,7 @@ class Pager {
 
     /** DEFINE O PAGER */
     private $Page;
+    private $Pages;
     private $Limit;
     private $Offset;
 
@@ -62,7 +63,7 @@ class Pager {
      */
     public function ReturnPage() {
         if ($this->Page > 1):
-            $nPage = $this->Page - 1;
+            $nPage = (intval($this->Last) ? $this->Last : $this->Page - 1);
             header("Location: {$this->Link}{$nPage}");
         endif;
     }

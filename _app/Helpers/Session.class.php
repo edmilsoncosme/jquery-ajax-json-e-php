@@ -85,7 +85,6 @@ class Session {
 
             $updateSiteViews = new Update;
             $updateSiteViews->ExeUpdate('ws_siteviews', $ArrSiteViews, "WHERE siteviews_date = :date", "date={$this->Date}");
-
         endif;
     }
 

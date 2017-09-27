@@ -88,7 +88,7 @@ class Login {
 
     //Vetifica usuário e senha no banco de dados!
     private function getUser() {
-        $this->Senha = md5($this->Senha);   
+        $this->Senha = md5($this->Senha);
 
         $read = new Read;
         $read->ExeRead("ws_users", "WHERE user_email = :e AND user_password = :p", "e={$this->Email}&p={$this->Senha}");
