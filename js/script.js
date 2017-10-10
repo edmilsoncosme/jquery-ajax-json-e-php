@@ -7,28 +7,28 @@ $(function () {
         $('.j_formsubmit').find('input[class !="noclear"]').val('');
         $('.j_formsubmit').find('input[name="action"]').val('create');
     });
-    
-    $('.j_upload').submit(function(){
+
+    $('.j_upload').submit(function () {
         var form = $(this);
         form.ajaxSubmit({
             url: 'ajax/ajax.php',
             data: {action: 'upload'},
-            beforeSubmit: function(){
-                
+            beforeSubmit: function () {
+
             },
-            uploadProgress: function(evento, posicao, total, completo){
+            uploadProgress: function (evento, posicao, total, completo) {
                 form.find('.j_progress').fadeIn();
-                 $('.j_progress .bar').text(completo + "%").width(completo + "%");
+                $('.j_progress .bar').text(completo + "%").width(completo + "%");
             },
-            success: function(){
-                
+            success: function () {
+
             }
         });
         // pra não enviar via http e sim via ajax
         return false;
     });
-    
-    
+
+
     $('.j_load').click(function () {
 
         var destino = $('.' + $(this).attr('rel'));
@@ -75,10 +75,22 @@ $(function () {
                     form.find('.trigger-box').html('<div class="trigger trigger-success">' + resposta.success + '</div>');
                     form.find('.trigger-success').fadeIn();
                     form.find('input[class !="noclear"]').val('');
+
+                    //removendo o item da lista que foi alterado
+                    if (resposta.user_id) {
+                        $('#' + resposta.user_id).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                        $('.j_formsubmit').find('.j_btncadastro').text("Cadastrar Usuário");
+                        $('.j_formsubmit').find('input[name="action"]').val('create');
+                        $('.j_formsubmit').find('.j_userid').remove();
+                    }
+                    // adicionando o item que foi incluído ou alterado
                     $(resposta.result).prependTo($('.register').find('.j_list'));
                     $('.j_register').fadeIn(400);
                 }
                 form.find('.form_load').fadeOut(500);
+
             }
         });
         return false;
@@ -96,7 +108,7 @@ $(function () {
             dataType: 'json',
             beforeSend: function () {
                 $('.j_userid').remove();
-                $('.j_formsubmit').find('.j_btncadastro').text("Alterar Usuário");                
+                $('.j_formsubmit').find('.j_btncadastro').text("Alterar Usuário");
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
@@ -123,13 +135,13 @@ $(function () {
             url: 'ajax/ajax.php',
             data: {action: 'deleteuser', user_id: user_id},
             type: 'POST',
-            dataType: 'json',          
-            success: function (data) {                               
+            dataType: 'json',
+            success: function (data) {
                 if (data.error) {
                     alert('Erro ao deletar. Favor recarregue a página!');
-                }else if (data.admin) {
-                   alert('Usuário com perfil de adminstrador! Não pode ser deletado.!');
-                }else {                  
+                } else if (data.admin) {
+                    alert('Usuário com perfil de adminstrador! Não pode ser deletado.!');
+                } else {
                     $('#' + user_id).fadeOut(400, function () {
                         $(this).remove();
                     });
