@@ -79,7 +79,7 @@
                             <h1><?= $user_name; ?>  <?= $user_lastname; ?></h1>
                             <p><?= $user_email; ?> (Nível<?= $user_level; ?>)</p>
                             <a class="action edit j_edit" rel="<?= $user_id; ?>">Editar</a>
-                            <a class="action del j_delete " rel="<?= $user_id; ?>">Deletar</a>                            
+                            <a class="action del j_delete" rel="<?= $user_id; ?>">Deletar</a>                            
                         </article>
                         <?php
                     endforeach;

@@ -130,6 +130,7 @@ $(function () {
     });
 
     $('.j_list').on('click', '.j_delete', function () {
+        var form = $(this);
         var user_id = $(this).attr('rel');
         $.ajax({
             url: 'ajax/ajax.php',
@@ -145,6 +146,13 @@ $(function () {
                     $('#' + user_id).fadeOut(400, function () {
                         $(this).remove();
                     });
+                    
+                    alert('Deletado com sucesso');                    
+                    
+                    form.find('.trigger-box').html('<div class="trigger trigger-success">' + data.success + '</div>');
+                    form.find('.trigger-success').fadeIn();
+                    form.find('input[class !="noclear"]').val('');
+
                 }
             }
         });

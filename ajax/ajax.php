@@ -40,7 +40,7 @@ switch ($Action):
             else:
                 $Create->ExeCreate('ws_users', $Post);
                 $jSon['success'] = "Cadastro com sucesso!";
-                $jSon['result'] = "<article style='display:none' class='user_box j_register' id='{$Create->getResult()}'><h1>{$Post['user_name']} {$Post['user_lastname']}</h1><p>{$Post['user_email']} (Nível {$Post['user_level']})</p><a class='action edit j_edit' rel='{$Create->getResult()}'>Editar</a><a class='action del' rel='{$Create->getResult()}'>Deletar</a></article>";
+                $jSon['result'] = "<article style='display:none' class='user_box j_register' id='{$Create->getResult()}'><h1>{$Post['user_name']} {$Post['user_lastname']}</h1><p>{$Post['user_email']} (Nível {$Post['user_level']})</p><a class='action edit j_edit' rel='{$Create->getResult()}'>Editar</a><a class='action del j_delete' rel='{$Create->getResult()}'>Deletar</a></article>";
             endif;
         endif;
         break;
@@ -62,7 +62,7 @@ switch ($Action):
                 $Update->ExeUpdate("ws_users", $Post, "WHERE user_id = :id", "id={$UserId}");
                 $jSon['success'] = "Usuário atualizado com sucesso!";
                 
-                $jSon['result'] = "<article style='display:none' class='user_box j_register' id='{$UserId}'><h1>{$Post['user_name']} {$Post['user_lastname']}</h1><p>{$Post['user_email']} (Nível {$Post['user_level']})</p><a class='action edit j_edit' rel='{$UserId}'>Editar</a><a class='action del' rel='{$UserId}'>Deletar</a></article>";
+                $jSon['result'] = "<article style='display:none' class='user_box j_register' id='{$UserId}'><h1>{$Post['user_name']} {$Post['user_lastname']}</h1><p>{$Post['user_email']} (Nível {$Post['user_level']})</p><a class='action edit j_edit' rel='{$UserId}'>Editar</a><a class='action del j_delete' rel='{$UserId}'>Deletar</a></article>";
                 // retorando o id do usuário que foi alterado.
                 $jSon['user_id'] = $UserId;
             endif;
@@ -90,8 +90,9 @@ switch ($Action):
         else:
             $Delete->ExeDelete('ws_users', "WHERE user_id = :id", "id={$Post['user_id']}");
             if (!$Delete->getRowCount()):
-                $jSon['error'] = true;
+                $jSon['error'] = true;                
             endif;
+            $jSon['success'] = "Usuário deletado com sucesso!";
         endif;
 
         break;
