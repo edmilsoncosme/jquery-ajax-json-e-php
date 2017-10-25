@@ -143,16 +143,12 @@ $(function () {
                 } else if (data.admin) {
                     alert('Usuário com perfil de adminstrador! Não pode ser deletado.!');
                 } else {
+                    //Carregando a mensagem na tela                     
+                    $('.j_list').find('.trigger-box-delete').html('<div class="trigger trigger-box-delete">' + data.success + '</div>');                    
+                    $('.j_list').find('.trigger-box-delete').fadeIn();
                     $('#' + user_id).fadeOut(400, function () {
                         $(this).remove();
-                    });
-                    
-                    alert('Deletado com sucesso');                    
-                    
-                    form.find('.trigger-box').html('<div class="trigger trigger-success">' + data.success + '</div>');
-                    form.find('.trigger-success').fadeIn();
-                    form.find('input[class !="noclear"]').val('');
-
+                    });                                        
                 }
             }
         });

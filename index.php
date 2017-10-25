@@ -27,6 +27,7 @@
             .trigger{display: none; text-transform: uppercase; padding: 15px; background: #ccc; color: #000; margin-bottom: 20px; font-size: 0.8em; font-weight: bolder}
             .trigger-error{background: #e4b4b4;}
             .trigger-success{background: #b4e4b9;}
+            .trigger-box-delete{background: #b4e4b9;}
             .loamore{display: inline-block; margin-top: 25px; text-transform: uppercase; font-size: 0.7em; background: #555; color: #fff; padding: 10px; cursor: pointer;}
 
         </style>
@@ -47,8 +48,8 @@
             
             <header>
                 <a class="j_open openform" rel="usercreate"></a>
-                <h1>Usuários</h1>
-                <p>Mantendo tela de Usuários!</p>                
+<!--                <h1>Usuários</h1>
+                <p>Mantendo tela de Usuários!</p>                -->
             </header>
 
             <form name="user_register" class="j_formsubmit usercreate" method="post" action="">
@@ -66,7 +67,7 @@
             </form>
 
             <div class="j_list"> 
-
+                <div class="trigger-box-delete"></div>
                 <?php
                 require './_app/Config.inc.php';
                 $Read = new Read;
