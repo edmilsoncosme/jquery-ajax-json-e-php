@@ -109,6 +109,7 @@ $(function () {
             beforeSend: function () {
                 $('.j_userid').remove();
                 $('.j_formsubmit').find('.j_btncadastro').text("Alterar Usuário");
+                $('.j_formsubmit').find('.trigger-box').fadeOut();                
             },
             success: function (data) {
                 if (!$('.j_formsubmit').is(':visible') && !data.error) {
